@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   Query,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -17,8 +19,8 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
+  @UsePipes(ValidationPipe)
   create(@Body() createProductDto: CreateProductDto) {
-    console.log(createProductDto);
     return this.productsService.create(createProductDto);
   }
 

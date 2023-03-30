@@ -1,12 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { data } from './data';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import * as data from '../data.json';
 
 @Injectable()
 export class ProductsService {
   create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+    const newItem = {
+      ...createProductDto,
+      id: data.length + 1,
+    };
+
+    data.push(newItem);
+
+    return newItem;
   }
 
   findAll() {
